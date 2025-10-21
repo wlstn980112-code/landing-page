@@ -10,7 +10,7 @@ export default function SumSnapLanding() {
   const [demoUrl, setDemoUrl] = useState("");
 
   // Chatbot state
-  const systemPrompt = `당신은 SumSnap Landing Template(v0.1.0)의 프로젝트 안내 챗봇입니다. 모든 답변은 한국어로 간결하고 정확하게 제공합니다.
+  const systemPrompt = `당신은 SumSnap Landing Template(v0.1.0)의 스마트 어시스턴트입니다. 모든 답변은 한국어로 간결하고 정확하게 제공합니다. 프로젝트 관련 질문뿐 아니라 일반 지식/최근 이슈 등도 답변하되, 최신 정보가 필요하거나 확신이 낮으면 웹 검색(/web 명령으로 제공되는 컨텍스트)을 우선 활용하세요.
 
 프로젝트 개요:
 - Next.js 14.2.16(App Router), React 18, TypeScript 5
@@ -773,7 +773,7 @@ export default function SumSnapLanding() {
                     sendMessage();
                   }
                 }}
-                placeholder="메시지를 입력하세요"
+                placeholder="메시지를 입력하세요 (/web 키워드 → 최신 웹검색)"
                 className="flex-1 bg-secondary/40 border border-border rounded-md px-3 py-2 text-sm focus:outline-none"
                 aria-label="메시지 입력"
               />

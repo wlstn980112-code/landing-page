@@ -93,10 +93,12 @@ export async function searchWeb(query: string) {
 
   console.log("[search] start", { qlen: trimmed.length });
   try {
+    // 1) Prefer POST. Include api_key in body for widest compatibility.
     const response = await fetch("https://api.tavily.com/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // Some deployments require header auth. Keep both body and header.
         "X-API-Key": apiKey,
       },
       body: JSON.stringify({
@@ -104,19 +106,36 @@ export async function searchWeb(query: string) {
         max_results: 5,
         include_answer: true,
         search_depth: "advanced",
+        api_key: apiKey,
       }),
       cache: "no-store",
     });
 
-    if (!response.ok) {
+    let finalData: any | null = null;
+    if (response.ok) {
+      finalData = await response.json();
+    } else {
       const text = await response.text();
       console.error("[search] http_error", response.status, text);
-      return { ok: false, error: "http_error" } as const;
     }
-    const data = await response.json();
-    const results = Array.isArray(data?.results) ? data.results : [];
+
+    // 2) Fallback GET if POST failed
+    if (!finalData) {
+      const url = `https://api.tavily.com/search?q=${encodeURIComponent(
+        trimmed
+      )}&api_key=${encodeURIComponent(apiKey)}&max_results=5`;
+      const getRes = await fetch(url, { cache: "no-store" });
+      if (!getRes.ok) {
+        const msg = await getRes.text();
+        console.error("[search] get_http_error", getRes.status, msg);
+        return { ok: false, error: "http_error" } as const;
+      }
+      finalData = await getRes.json();
+    }
+
+    const results = Array.isArray(finalData?.results) ? finalData.results : [];
     console.log("[search] done", { num: results.length });
-    return { ok: true, data } as const;
+    return { ok: true, data: finalData } as const;
   } catch (e) {
     console.error("[search] exception", e);
     return { ok: false, error: "exception" } as const;
