@@ -1,0 +1,16 @@
+﻿# dependencies
+node_modules
+
+# next.js
+.next
+out
+.vercel
+
+# env
+.env
+.env.*
+.env.local
+
+# logs
+*.log
+*.tmp

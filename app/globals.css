@@ -1,0 +1,169 @@
+@font-face {
+  font-family: "Yangjin";
+  src: url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
+    format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* SumSnap 브랜드 색상으로 업데이트 - 딥네이비 + 민트 */
+  --background: #f5f5dc;
+  --foreground: #2d3142;
+  --card: #f0f0d8;
+  --card-foreground: #2d3142;
+  --popover: #f0f0d8;
+  --popover-foreground: #2d3142;
+  --primary: #d2691e;
+  --primary-foreground: #1c1f2b;
+  --secondary: #e8e8d0;
+  --secondary-foreground: #2d3142;
+  --muted: #e0e0c8;
+  --muted-foreground: #5a5a4a;
+  --accent: #d2691e;
+  --accent-foreground: #1c1f2b;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(45, 49, 66, 0.2);
+  --input: rgba(45, 49, 66, 0.2);
+  --ring: #d2691e;
+  --chart-1: #d2691e;
+  --chart-2: #7c3aed;
+  --chart-3: #f59e0b;
+  --chart-4: #10b981;
+  --chart-5: #ec4899;
+  --radius: 0.75rem;
+  --sidebar: #f5f5dc;
+  --sidebar-foreground: #2d3142;
+  --sidebar-primary: #d2691e;
+  --sidebar-primary-foreground: #1c1f2b;
+  --sidebar-accent: #e8e8d0;
+  --sidebar-accent-foreground: #2d3142;
+  --sidebar-border: rgba(45, 49, 66, 0.2);
+  --sidebar-ring: #d2691e;
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  --font-playfair: "Playfair Display", ui-serif, serif;
+  --font-yangjin: "Yangjin", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-playfair);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas,
+    "Liberation Mono", Menlo, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.font-poppins {
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+  font-display: swap;
+}
+
+.font-yangjin {
+  font-family: var(--font-yangjin), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+}
+
+@supports (font-display: swap) {
+  @font-face {
+    font-family: "Playfair Display";
+    font-display: swap;
+  }
+}
+
+.mix-blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+.backdrop-blur-custom {
+  backdrop-filter: blur(8.25px);
+}
+
+/* 그라데이션 애니메이션 추가 */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* 글로우 효과 */
+.glow-mint {
+  box-shadow: 0 0 20px rgba(210, 105, 30, 0.3);
+}
+
+.glow-mint-strong {
+  box-shadow: 0 0 40px rgba(210, 105, 30, 0.5);
+}
